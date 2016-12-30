@@ -1,0 +1,27 @@
+server {
+    listen  80;
+    access_log /home/work/liujieliang/logs/qanew.log main;
+    error_log  /home/work/liujieliang/logs/qanew.err;
+    if ($http_user_agent ~* Baiduspider){
+        return 403 http://www.hellonet8.com$request_uri;
+    }
+    server_name qanew.market-tms.wmdev.lsh123.com;
+    root	/home/work/test-env/market-tms/fe-test-qanew/webroot;	
+    location /static/ {
+        root	/home/work/test-env/market-tms/fe-test-qanew/webroot;	
+    }
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+    if ($http_user_agent ~* Baiduspider){
+        return 403 http://www.hellonet8.com$request_uri;
+    }
+    server_name point.market-tms.wmdev.lsh123.com;
+    root	/home/work/test-env/market-tms/fe-test-point/webroot;	
+    location /static/ {
+        root	/home/work/test-env/market-tms/fe-test-point/webroot;	
+    }
+    include fe_server_base;
+}

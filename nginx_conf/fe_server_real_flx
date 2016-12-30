@@ -1,0 +1,72 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ares.market-mis.wmdev2.lsh123.com;
+	root /home/fuluxing/lsh/MARKET-SUPPLY/webroot/;
+	location /static/ {
+		root /home/fuluxing/lsh/MARKET-SUPPLY/webroot/;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ares.market-h5.wmdev2.lsh123.com;
+	root /home/fuluxing/lsh/MARKET-H5/webroot/;
+	location /static/ {
+		root /home/fuluxing/lsh/MARKET-H5/webroot/;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ares.market-rd.wmdev2.lsh123.com;
+	root /home/fuluxing/lsh/MARKET-RD/webroot/;
+	location /static/ {
+		root /home/fuluxing/lsh/MARKET-RD/webroot/;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name flx.market-mis.wmdev2.lsh123.com;
+	root /home/work/test-env/market-mis/fe-test-flx/webroot/;
+	location /static/ {
+		root /home/work/test-env/market-mis/fe-test-flx/webroot/;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ares.market-api.wmdev2.lsh123.com;
+	root /home/fuluxing/lsh/MARKET-API/webroot/;
+	location /static/ {
+		root /home/fuluxing/lsh/MARKET-API/webroot/;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ares2.market-h5.wmdev2.lsh123.com;
+	root /home/fuluxing/lsh/MARKET-H5-2/webroot/;
+	location /static/ {
+		root /home/fuluxing/lsh/MARKET-H5-2/webroot/;
+	}
+	include fe_server_base;
+}

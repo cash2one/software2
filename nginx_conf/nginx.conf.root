@@ -1,0 +1,1070 @@
+user  work;
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+worker_rlimit_nofile 8192;
+
+error_log  logs/error.log  notice;
+
+pid        logs/nginx.pid;
+
+events {
+    use epoll;
+    worker_connections  8192;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    map $host $logid {
+        default '';
+    }
+
+    log_format  main  '[$remote_addr] - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" "$http_cookie" "$http_user_agent" '
+                      '$remote_addr $server_addr $upstream_addr $host '
+                      '"$http_x_forwarded_for" $request_time $upstream_response_time [$logid]';
+
+    access_log  logs/access_log  main;
+
+    client_body_temp_path cache/client_body;
+    fastcgi_temp_path cache/fastcgi;
+    proxy_temp_path cache/proxy;
+    uwsgi_temp_path cache/uwsgi;
+    scgi_temp_path cache/scgi;
+
+    server_names_hash_bucket_size 512;
+    client_header_buffer_size 4k;
+    large_client_header_buffers 4 32k;
+    client_max_body_size 4m;
+    client_body_buffer_size 513k;
+
+    sendfile        on;
+    tcp_nopush      on;
+    tcp_nodelay     on;
+
+    fastcgi_connect_timeout 600;
+    fastcgi_send_timeout 600;
+    fastcgi_read_timeout 600;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers 4 64k;
+    fastcgi_busy_buffers_size 128k;
+    fastcgi_temp_file_write_size 128k;
+    fastcgi_intercept_errors on;
+
+    keepalive_timeout  65;
+    gzip  on;
+    gzip_min_length 1k;
+    gzip_buffers 4 16k;
+    gzip_http_version 1.0;
+    gzip_comp_level 4;
+    gzip_types text/plain application/x-javascript text/css application/xml application/javascript text/javascript;
+    gzip_vary on;
+
+    proxy_connect_timeout 15s;
+    proxy_read_timeout 24s;
+    proxy_send_timeout 10s;
+    proxy_buffer_size 64k;
+    proxy_buffers 4 64k;
+    proxy_busy_buffers_size 128k;
+    proxy_temp_file_write_size 128k;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    set_real_ip_from 192.168.0.0/24;
+    real_ip_header CLIENTIP;
+
+    if ($http_user_agent ~* Baiduspider){
+        return 403;
+    }
+    
+    #chunked_transfer_encoding off;
+    upstream fe.jenkins.lsh123.com{
+        server 192.168.60.44:8088;
+    }
+    upstream web.competitor.lsh123.com{
+        server 192.168.60.41:80;
+    }
+    upstream jingpin.lsh123.com{
+        server 192.168.60.49:80;
+    }
+    upstream flower.lsh123.com{
+        server 192.168.60.56:5555; 
+    }
+    upstream qa.campus.lsh123.com{
+        server 127.0.0.1:3033;
+    }
+    upstream test.ela.lsh123.com{
+        server 192.168.60.59:9200;
+    }
+    upstream test.api.wms.lsh123.com{
+        server 127.0.0.1:9006;
+    }
+
+    upstream jira.lsh123.com {
+        server 192.168.60.59:8020;
+    }
+    upstream erp.lsh123.com {
+        server 192.168.60.50:80;
+    }
+
+    upstream wms.qatest.lsh123.com {
+        server 192.168.60.51:80;
+    }
+
+    upstream jenkins.lsh123.com {
+        server 192.168.60.59:9090;
+    }
+
+    upstream wiki.lsh123.com {
+        server 192.168.60.59:8040;
+    }
+    
+    upstream wms.lsh123.com {
+        server 127.0.0.1:9002;
+    }
+
+    upstream api.wms.lsh123.com {
+        server 127.0.0.1:9003;
+    }
+
+
+    upstream task.wms.lsh123.com {
+        server 127.0.0.1:9004;
+    }
+
+    upstream api.risk.lsh123.com {
+        server 127.0.0.1:9007;
+    }
+
+    upstream test.api.risk.lsh123.com {
+        server 127.0.0.1:9008;
+    }
+
+    upstream odoo.lsh123.com {
+        server 192.168.60.59:8069;
+    }
+
+    upstream dubbo-admin.lsh123.com {
+        server 127.0.0.1:9380;
+    }
+
+
+    upstream dubbo-monitor.lsh123.com {
+        server 127.0.0.1:8084;
+    }
+
+    upstream wms-dubbo-monitor.lsh123.com {
+        server 127.0.0.1:8081;
+    }
+
+
+    upstream search.lsh123.com {
+        server 127.0.0.1:9200;
+    }
+
+    upstream es.dev.lsh123.com {
+        server 192.168.60.48:5601;
+    }
+
+    upstream hadoop.hdfs.lsh123.com {
+        server 192.168.60.154:50070;
+    }
+    
+    upstream hadoop.yarn.lsh123.com {
+        server 192.168.60.155:8088;
+    }
+
+    upstream hadoop.jobhistory.lsh123.com {
+        server 192.168.60.155:19888;
+    }
+
+    upstream ganglia.lsh123.com {
+        server 192.168.60.156:80;
+    }
+    upstream nexus.lsh123.com{
+        server 127.0.0.1:8081;
+    }
+
+    upstream api.test.atp.lsh123.com {
+        server 127.0.0.1:8898;
+    }
+    
+    upstream airflow.lsh123.com {
+        server 192.168.60.157:8002;
+    }
+    upstream monitor.dubbo.atp.lsh123.com {
+        server 192.168.60.153:9107;
+    }
+    upstream bak.monitor.dubbo.atp.lsh123.com {
+        server 192.168.60.151:9107;
+    }
+    upstream admin.dubbo.atp.lsh123.com {
+        server 192.168.60.153:9108;
+    }   
+    upstream bak.admin.dubbo.atp.lsh123.com {
+        server 192.168.60.151:9108;
+    }
+    upstream tbschedule.atp.lsh123.com {
+        server 192.168.60.153:9106;
+    }
+    upstream bak.tbschedule.atp.lsh123.com {
+        server 192.168.60.151:9106;
+    }
+    upstream api.ofc.lsh123.com {
+        server 127.0.0.1:9088;
+    }
+    server {
+        listen      80;
+        server_name test.api.ofc.lsh123.com;
+        location / {
+            proxy_pass http://api.ofc.lsh123.com;
+        }
+    }
+    server {
+        listen      80;
+        server_name fe.jenkins.lsh123.com;
+        location / {
+            proxy_pass http://fe.jenkins.lsh123.com;
+        }
+    }
+    upstream test.ws.ofc.lsh123.com {
+        server 127.0.0.1:9089;
+    }
+    server {
+        listen      8080;
+        server_name test.ws.ofc.lsh123.com;
+        location / {
+            proxy_pass http://test.ws.ofc.lsh123.com;
+        }
+    }
+
+
+    upstream pro.api.ofc.lsh123.com {
+        server 192.168.60.152:9500;
+    }
+    server {
+        listen      80;
+        server_name pro.api.ofc.lsh123.com;
+        location / {
+            proxy_pass http://pro.api.ofc.lsh123.com;
+        }
+    }
+    server {
+        listen      80;
+        server_name flower.lsh123.com;
+        location / {
+            proxy_pass http://flower.lsh123.com;
+        }
+    }
+    server {
+        listen      80;
+        server_name qa.campus.lsh123.com;
+        location / {
+            proxy_pass http://qa.campus.lsh123.com;
+        }
+    }
+  
+    server {
+        listen      9205;
+        server_name test.ela.lsh123.com;
+        location / {
+            proxy_pass http://test.ela.lsh123.com;
+        }
+    }
+
+    upstream elastic-job-console.lsh123.com {
+        server 192.168.60.152:9700;
+    }
+    server {
+        listen      80;
+        server_name elastic-job-console.lsh123.com;
+        location / {
+            proxy_pass http://elastic-job-console.lsh123.com;
+        }
+    }
+
+    upstream test.elastic-job-console.lsh123.com {
+        server 192.168.60.48:8088;
+    }
+    server {
+        listen      80;
+        server_name test.elastic-job-console.lsh123.com;
+        location / {
+            proxy_pass http://test.elastic-job-console.lsh123.com;
+        }
+    }
+
+    server {
+            listen  80;
+            server_name erp.lsh123.com;
+            location / {
+                proxy_pass http://erp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name monitor.dubbo.atp.lsh123.com;
+            location / {
+                proxy_pass http://monitor.dubbo.atp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name admin.dubbo.atp.lsh123.com;
+            location / {
+                proxy_pass http://admin.dubbo.atp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name tbschedule.atp.lsh123.com;
+            location / {
+                proxy_pass http://tbschedule.atp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name bak.monitor.dubbo.atp.lsh123.com;
+            location / {
+                proxy_pass http://bak.monitor.dubbo.atp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name bak.admin.dubbo.atp.lsh123.com;
+            location / {
+                proxy_pass http://bak.admin.dubbo.atp.lsh123.com;
+            }
+    }
+    server {
+            listen  8082;
+            server_name bak.tbschedule.atp.lsh123.com;
+            location / {
+                proxy_pass http://bak.tbschedule.atp.lsh123.com;
+            }
+    }
+    server {
+        listen     80;
+        server_name api.test.atp.lsh123.com;
+        location / {
+            proxy_pass http://api.test.atp.lsh123.com;   
+        }
+    }
+
+    upstream tbschedule.lsh123.com {
+        server 127.0.0.1:8085;
+    }
+    server {
+        listen     80;
+        server_name tbschedule.lsh123.com;
+        location / {
+            proxy_pass http://tbschedule.lsh123.com;
+        } 
+    }
+
+    server {
+	    listen     80;
+	    server_name hadoop.hdfs.lsh123.com; 
+        
+    location / {
+            proxy_pass http://hadoop.hdfs.lsh123.com;
+        }
+    }
+    server{
+            listen     80;
+            server_name nexus.lsh123.com;
+    location /{
+            proxy_pass http://nexus.lsh123.com;
+        }
+    }
+
+    server {
+	    listen     80;
+	    server_name hadoop.yarn.lsh123.com; 
+        location / {
+            proxy_pass http://hadoop.yarn.lsh123.com;
+        }
+    }
+
+    server {
+	    listen     80;
+	    server_name hadoop.jobhistory.lsh123.com; 
+        location / {
+            proxy_pass http://hadoop.jobhistory.lsh123.com;
+        }
+    }
+
+    server {
+	    listen     80;
+	    server_name ganglia.lsh123.com;
+        location / {
+            proxy_pass http://ganglia.lsh123.com;
+        }
+    }
+
+#   server {
+#     listen     80;
+#	server_name  wmdev.res.lsh123.com;
+#        rewrite  "^/(.*)$"  http://www.lsh123.com/$1 break;
+#    }
+  
+
+#    server {
+#	    listen     80;
+#	    server_name zabbix; 
+#        
+#    location /www/ {
+#            proxy_pass http://zabbix;
+#        }
+#    }
+    
+
+    server {
+        listen  80;
+        server_name wmdev.lsh123.com;
+        server_name 115.182.215.159;
+        server_name wmdev.res.lsh123.com;
+        server_name wmdev2.res.lsh123.com;
+        server_name test.res.lsh123.com;
+        server_name res.wmdev2.lsh123.com;
+        access_log  logs/access_log  main;
+
+        #set_by_lua $logid '
+        #    return ngx.worker.pid() 
+        #';
+
+        root	/home/work/code/Avatar/yaf/platform/webroot;	
+	    index index.php;
+        
+        error_page 404 =200 http://www.lsh123.com$request_uri;
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+        error_page   413             /static/common/html/413.html; 
+
+        if ($http_user_agent ~* "qihoobot|Baiduspider|Googlebot|Googlebot-Mobile|Googlebot-Image|Mediapartners-Google|Adsbot-Google|Feedfetcher-Google|Yahoo! Slurp|Yahoo! Slurp China|YoudaoBot|Sosospider|Sogou spider|Sogou web spider|MSNBot|ia_archiver|Tomato Bot") 
+        { 
+         return 403; 
+        } 
+        location ~ ^/(favicon.ico|static) {
+            expires 7d;
+        }  
+
+        location ^~ /static/common/html/ {
+            expires off;
+        }
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            #fastcgi_param PHP_VALUE "auto_prepend_file=profile.php";
+            include        fastcgi_params;
+        }
+        
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+        
+        location /img/examples {
+            try_files $uri $uri/;
+        }
+        
+        location /img/ {
+            rewrite /img/(.*)/(.*) /_img/fuck/$2$1;
+        }
+
+        location /_img/fuck/ {
+            gridfs res_img
+                root_collection=fs
+                field=_id
+                type=objectid;
+            mongo 127.0.0.1:30000;
+        }
+
+        location /file/ {
+            gridfs res_file
+                root_collection=fs
+                field=_id
+                type=objectid;
+            mongo 127.0.0.1:30000;
+        }
+
+
+        location = /favicon.ico {
+            rewrite /favicon.ico /static/common/favicon.ico;
+        }
+        location ~* \.(txt|doc)$ {  
+            root   /usr/local/nginx/html;  
+            deny all;  
+        }
+        error_page  403              /403.html;  
+        location = /403.html {  
+             root  html;  
+        }  
+    }
+
+    server {
+        listen  80;
+        server_name jira.lsh123.com;
+        location / {
+            proxy_pass http://jira.lsh123.com;
+        }
+    }
+    server {
+        listen  80;
+        server_name test.api.wms.lsh123.com;
+        location / {
+            proxy_pass http://test.api.wms.lsh123.com;
+        }
+    }
+    
+    server {
+        listen       80;
+        server_name dev.api.data.lsh123.com;
+        root  /home/inf/data-api/focus/public/;
+        index index.php;
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/inf/php5/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+    	}
+
+    server {
+        listen  80;
+        server_name odoo.lsh123.com;
+        location / {
+            proxy_pass http://odoo.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name wiki.lsh123.com;
+        location / {
+            proxy_pass http://wiki.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name dubbo-admin.lsh123.com;
+        location / {
+            proxy_pass http://dubbo-admin.lsh123.com;
+        }
+    }
+
+
+    server {
+        listen  80;
+        server_name dubbo-monitor.lsh123.com;
+        location / {
+            proxy_pass http://dubbo-monitor.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name wms-dubbo-monitor.lsh123.com;
+        location / {
+            proxy_pass http://wms-dubbo-monitor.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name jenkins.lsh123.com;
+        location / {
+            proxy_pass http://jenkins.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name search.lsh123.com;
+        location / {
+            proxy_pass http://search.lsh123.com;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name es.dev.lsh123.com;
+        location / {
+            proxy_pass http://es.dev.lsh123.com;
+        }
+    }
+
+   server{
+        listen  80;
+        server_name wms.lsh123.com;
+        location / {
+            proxy_pass http://wms.lsh123.com;
+         }
+   }
+
+
+   server{
+        listen  80;
+        server_name wms.qatest.lsh123.com;
+        location / {
+            proxy_pass http://wms.qatest.lsh123.com;
+         }
+   }
+
+   server{
+        listen  80;
+        server_name api.wms.lsh123.com;
+        location / {
+            proxy_pass http://api.wms.lsh123.com;
+         }
+   }
+
+
+    server {
+        listen  80;
+        server_name airflow.lsh123.com;
+        location / {
+            proxy_pass http://airflow.lsh123.com;
+        }
+    }
+
+   server{
+        listen  80;
+        server_name task.wms.lsh123.com;
+        location / {
+            proxy_pass http://task.wms.lsh123.com;
+         }
+   }
+
+
+
+   server{
+        listen  80;
+        server_name api.risk.lsh123.com;
+        location / {
+            proxy_pass http://api.risk.lsh123.com;
+         }
+   }
+   server{
+        listen  80;
+        server_name web.competitor.lsh123.com;
+        location / {
+            proxy_pass http://web.competitor.lsh123.com;
+         }
+   }
+   server{
+        listen  80;
+        server_name jingpin.lsh123.com;
+        location / {
+            proxy_pass http://jingpin.lsh123.com;
+         }
+   }
+   server{
+        listen  80;
+        server_name test.api.risk.lsh123.com;
+        location / {
+            proxy_pass http://test.api.risk.lsh123.com;
+         }
+   }
+
+#    server {
+#        listen  80;
+#        server_name wmdev.approve.lsh123.com;
+#        server_name test.approve.lsh123.com;
+#        root	/home/work/code/Avatar/yaf/approve/webroot;	
+#        index index.php;
+#
+#        error_page  404               /static/common/html/404.html;
+#        error_page   500 502 503 504   /static/common/html/500.html; 
+#
+#        location ~ \.php$ {
+#            if ($request_uri ~ ^\/receiver\.php) {
+#                return 403;
+#            }
+#            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+#            fastcgi_index  index.php;
+#            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+#            include        fastcgi_params;
+#        }
+#
+#        location / {
+#            try_files $uri    $uri/    /index.php$is_args$args;
+#        }	
+#
+#        location /static/ {
+#            root /home/work/code/Avatar/yaf/platform/webroot/;
+#        }
+#    }
+#
+    server {
+        listen  80;
+        server_name dev.market-mis.wmdev.lsh123.com;
+        server_name dev.market-mis.dev.lsh123.com;
+        root	/home/work/test-env/market-mis/market-mis/webroot/;
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/test-env/market-mis/market-mis/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name dev.market.dev.lsh123.com;
+        root	/home/work/test-env/market/market/webroot/;
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/test-env/market-mis/market-mis/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name fk.market.wmdev.lsh123.com;
+        server_name fk.market.dev.lsh123.com;
+        root	/home/work/fengkun/Avatar/yaf/market/webroot/;
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/fengkun/Avatar/yaf/market/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name dev.vrm.lsh123.com;
+        server_name vrm.wmdev.lsh123.com;
+        #server_name vrm.lsh123.com;
+        root	/home/work/code/Avatar/yaf/vrm/webroot;	
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/code/Avatar/yaf/vrm/webroot/;
+        }
+    }
+
+
+    server {
+        listen  80;
+        server_name dev.cms.lsh123.com;
+        root	/home/work/code/Avatar/yaf/cms-dev/webroot;	
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/code/Avatar/yaf/cms-dev/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name cms.lsh123.com;
+        root	/home/work/web/cms/webroot;	
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/web/cms/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name mis.lsh123.com;
+        root	/home/work/code/Avatar/yaf/mis/webroot;	
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        location /static/ {
+            root /home/work/code/Avatar/yaf/mis/webroot/;
+        }
+    }
+
+    server {
+        listen  80;
+        server_name lg.lsh123.com;
+        root /home/work/wulin/php_rbac/PhpRbac;  
+        index index.php;
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+    }
+     server {
+        listen   80;  
+        server_name java.lsh123.com;  
+  
+        access_log /tmp/access.log;  
+        error_log /tmp/error.log;  
+  
+        root /home/fuhao/download;  
+        index index.htm;  
+        limit_rate 50k;  
+        autoindex on;  
+        sendfile on;  
+        tcp_nopush on;  
+        expires 365d;  
+        error_page 400 403 404 500 501 502 503 504 505 /error.htm;  
+
+    }
+
+
+ server {
+     listen   80;
+     server_name static.rf.lsh123.com;
+     access_log /tmp/access.log;
+     error_log /tmp/error.log;
+
+     root /home/work/lsh-wms/wms-rf-web/webroot/;
+     index index.php;
+        location ~ ^/(favicon.ico|static) {
+            expires 7d;
+        }  
+
+        location ^~ /static/common/html/ {
+            expires off;
+        }
+
+        location /api/wms/rf/v1 {
+           proxy_redirect    off;
+           proxy_set_header  Host             $host;
+           proxy_set_header  X-Real-IP        $remote_addr;
+           proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+           proxy_pass http://127.0.0.1:9005;
+        }
+
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            #fastcgi_param PHP_VALUE "auto_prepend_file=profile.php";
+            include        fastcgi_params;
+        }
+        
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+        
+
+        location = /favicon.ico {
+            rewrite /favicon.ico /static/common/favicon.ico;
+        }
+}
+
+    server {
+        listen  80;
+        server_name stat.lsh123.com;
+        root	/home/work/env/piwik/piwik/;
+        index index.php;
+
+        error_page  404               /static/common/html/404.html;
+        error_page   500 502 503 504   /static/common/html/500.html; 
+
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+    }
+
+    server {
+        listen       80;
+        server_name dev.data.lsh123.com;
+        root  /home/inf/datalshwork/websites/visual/;
+        index index.php;
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/inf/php5/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+    }
+    server {
+        listen       80;
+        server_name dev.competitor.lsh123.com;
+        root  /home/inf/test_competitor/websites/visual/;
+        index index.php;
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/inf/php5/var/run/php-cgi.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }
+    }
+    
+    server {
+        listen       80;
+        server_name  zabbix.lsh123.com;
+        root   /home/zabbix/www/zabbix;
+        index index.php index.html;
+        location ~ \.php$ {
+            fastcgi_pass   unix:/home/zabbix/php/var/run/php-cgi.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+        location / {
+            try_files $uri    $uri/    /index.php$is_args$args;
+        }
+    }
+        server {
+            listen       8001;
+            server_name  dev.data.lsh123.com;
+            large_client_header_buffers 4 10m;
+            client_header_buffer_size  10m;
+
+            access_log  /home/inf/nginx/logs/fackcube.access.log  main;
+
+            location / {
+                include     uwsgi_params;
+                uwsgi_pass  127.0.0.1:7625;
+                uwsgi_read_timeout 300;
+            }
+
+            location /static/ {
+               root /home/inf/fakecube/src/web_api/;    
+            }
+            location /data {
+                root   /home/inf/fakecube/;
+                autoindex on;
+                autoindex_exact_size off;
+                break;
+            }
+
+
+            location  /offline {
+                include     uwsgi_params;
+                uwsgi_pass  127.0.0.1:8625;
+                rewrite ^/offline(.*) $1;
+                break;
+            }
+            
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+            }
+        }
+
+    include fe_server_real_*;
+}

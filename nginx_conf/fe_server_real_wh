@@ -1,0 +1,89 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wh.wmdev.lsh123.com;
+	root	/home/work/wuhao/code/fe-test-platform-wh/webroot;	
+	location /static/ {
+		root /home/work/wuhao/code/fe-test-platform-wh/webroot;
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ss.wms.wmdev2.lsh123.com;
+	root	/home/work/test-env/wms-phpui/fe-test-ss/webroot;	
+	location /static/ {
+		root /home/work/test-env/wms-phpui/fe-test-ss/webroot;
+    }
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wh.vrm.lsh123.com;
+	root	/home/work/wuhao/code/VRM-RD/webroot;	
+	location /static/ {
+		root /home/work/wuhao/code/VRM-RD/webroot;
+    }
+	include fe_server_base;
+}
+server {
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name test.wiki.lsh123.com;
+    location / {
+         proxy_pass   http://192.168.60.59:12080;
+    }
+}
+server {
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qatest01.tbschedule.lsh123.com;
+    location / {
+         proxy_pass   http://192.168.60.51:9991;
+    }
+}
+server {
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qatest.tbschedule.lsh123.com;
+    location / {
+         proxy_pass   http://192.168.60.51:9990;
+    }
+}
+server {
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name test.tbschedule.lsh123.com;
+    location / {
+         proxy_pass   http://127.0.0.1:9990;
+    }
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name  wh.wms.wmdev2.lsh123.com;
+	root	/home/work/test-env/wms-phpui/fe-test-qa/webroot;	
+	location /static/ {
+		root /home/work/test-env/wms-phpui/fe-test-qa/webroot;
+	}
+	include fe_server_base;
+}

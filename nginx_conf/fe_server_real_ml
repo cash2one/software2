@@ -1,0 +1,94 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ml.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-ml/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-ml/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ml.market.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/rd-dev-market-ml/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/rd-dev-market-ml/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ml.market-mis.wmdev.lsh123.com;
+	root	/home/work/test-env/market-mis/rd-test-ml/webroot;	
+	location /static/ {
+		root /home/work/test-env/market-mis/rd-test-ml/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ml.yar.wmdev.lsh123.com;
+    root /home/work/mali/market/ACL-RD/webroot;
+    include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ml.vrm.wmdev.lsh123.com;
+	root	/home/work/mali/dev/VRM-RD/webroot;
+	location /static/ {
+		root /home/work/mali/dev/VRM-RD/webroot;
+	}
+	include fe_server_base;
+
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name ml.lgy.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-lgy-ml/webroot;
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-lgy-ml/webroot;
+	}
+	include fe_server_base;
+
+}
+
+server {
+	listen  80;
+    if ($http_user_agent ~* Baiduspider){
+        return 403 http://www.hellonet8.com$request_uri;
+    }
+	server_name ml.wms.lsh123.com;
+	include fe_server_base;
+    root  /home/work/test-env/wms-phpui/fe-test-ml/webroot;
+    index index.php;
+    location ~ \.php$ {
+        fastcgi_pass   unix:/home/work/env/php/var/run/php-cgi.sock;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+

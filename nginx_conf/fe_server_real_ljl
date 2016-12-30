@@ -1,0 +1,97 @@
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljltms.log main;
+	error_log  /home/work/liujieliang/logs/ljltms.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name ljl.market-tms.wmdev.lsh123.com;
+	root    /home/work/test-env/market-tms/fe-test-ljl/webroot;
+	location /static/ {
+		root    /home/work/test-env/market-tms/fe-test-ljl/webroot;
+	}
+	include fe_server_base_ljl;
+}
+
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljlmongo.log main;
+	error_log  /home/work/liujieliang/logs/ljlmongo.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name mongo.market-tms.wmdev.lsh123.com;
+	root    /home/work/test-env/market-tms/fe-test-ljlmongo;
+}
+
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljles.log main;
+	error_log  /home/work/liujieliang/logs/ljles.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name es.market-tms.wmdev.lsh123.com;
+	location / {
+		proxy_pass http://192.168.60.59:9200/;
+	}
+}
+
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljlqa2tms.log main;
+	error_log  /home/work/liujieliang/logs/ljlqa2tms.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name ljlqa2.market-tms.wmdev.lsh123.com;
+	root    /home/work/test-env/market-tms/fe-test-ljlqa2/webroot;
+	location /static/ {
+		root    /home/work/test-env/market-tms/fe-test-ljlqa2/webroot;
+	}
+	include fe_server_base_ljl;
+}
+
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljlmis.log main;
+	error_log  /home/work/liujieliang/logs/ljlmis.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name  ljl.market-mis.work.lsh123.com;
+	root    /home/work/test-env/market-mis/fe-test-ljl/webroot;
+	location /static/ {
+		root    /home/work/test-env/market-mis/fe-test-ljl/webroot;
+	}
+	include fe_server_base_ljl;
+}
+
+server {
+	listen  80;
+	access_log /home/work/liujieliang/logs/ljlmis.log main;
+	error_log  /home/work/liujieliang/logs/ljlmis.err;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name  ljl.vrm.wmdev.lsh123.com;
+	root   /home/work/test-env/vrm/fe-test-ljl/webroot;
+	location /static/ {
+		root    /home/work/test-env/vrm/fe-test-ljl/webroot;
+	}
+	include fe_server_base_ljl;
+}
+
+server {
+	listen  80;
+	if ($http_user_agent ~* Baiduspider){
+		return 403 http://www.hellonet8.com$request_uri;
+	}
+	server_name dev2.market-tms.wmdev.lsh123.com;
+	root    /home/work/test-env/market-tms/fe-test-dev2/webroot;
+	location /static/ {
+		root        /home/work/test-env/market-tms/fe-test-dev2/webroot;
+	}
+	include fe_server_base;
+}
+

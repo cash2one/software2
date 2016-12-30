@@ -1,0 +1,38 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name qa.wm-tms.wmdev2.lsh123.com;
+	root	/home/work/test-env/wm-tms/fe-test-qa/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/wm-tms/fe-test-qa/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name qf.wm-tms.wmdev2.lsh123.com;
+	root	/home/work/test-env/wm-tms/fe-test-qf/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/wm-tms/fe-test-qf/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name cxx.wm-tms.wmdev2.lsh123.com;
+	root	/home/work/test-env/wm-tms/fe-test-cxx/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/wm-tms/fe-test-cxx/webroot;	
+	}
+	include fe_server_base;
+}

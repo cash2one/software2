@@ -1,0 +1,81 @@
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.wmdev2.lsh123.com
+        charset utf-8;
+    root    /home/work/code/Avatar/yaf/fe-test-platform-ne/webroot; 
+    location /static/ {
+        root /home/work/code/Avatar/yaf/fe-test-platform-ne/webroot/;
+    }
+    include fe_server_base;
+}
+
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.market-mis.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-mis/fe-test-ne/webroot;  
+    location /static/ {
+        root /home/work/test-env/market-mis/fe-test-ne/webroot;
+    }
+    include fe_server_base;
+}
+
+server{
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.market-h5.wmdev2.lsh123.com;
+    root /home/work/test-env/market-h5/fe-test-ne/webroot;
+    location /static/ {
+        root /home/work/test-env/market-h5/fe-test-ne/webroot;
+    }
+    include fe_server_base;
+}
+
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.market-trans-h5.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-trans-h5/fe-test-ne/webroot; 
+    location /static/ {
+        root /home/work/test-env/market-trans-h5/fe-test-ne/webroot;
+    }
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.sales-h5.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-sales-h5/fe-test-ne/webroot; 
+    location /static/ {
+        root /home/work/test-env/market-sales-h5/fe-test-ne/webroot;
+    }
+    include fe_server_base;
+}
+
+server{
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name ne.market-tms.wmdev2.lsh123.com;
+    root /home/work/test-env/market-tms/fe-test-ne/webroot;
+    location /static/ {
+        root /home/work/test-env/market-tms/fe-test-ne/webroot;
+    }
+    include fe_server_base;
+}
+

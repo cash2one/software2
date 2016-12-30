@@ -1,0 +1,13 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name bd.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-bd/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-bd/webroot;	
+	}
+	include fe_server_base;
+}
+

@@ -1,0 +1,26 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name rl.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-rl/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-rl/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name rl.vrm.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-vrm-rl/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-vrm-rl/webroot/;
+	}
+	include fe_server_base;
+}
+

@@ -1,0 +1,122 @@
+    upstream sjapi.yougong.elianshang.com {
+            server 127.0.0.1:8084;
+    }
+    	
+    upstream sj.yougong.elianshang.com {
+	    server 127.0.0.1:8083; 
+    }
+
+    upstream market.lsh123.com {
+            server 127.0.0.1:8081;
+    }
+
+    upstream m.yougong.elianshang.com {
+	    server 127.0.0.1:8082; 
+    }
+
+
+
+
+
+
+
+    upstream vrm.lsh123.com {
+	server 127.0.0.1:8085;
+    }
+
+    upstream xs.lshyg.cn {
+	server 127.0.0.1:8086;
+    }
+
+    server {
+        listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+        server_name m.yougong.elianshang.com;
+        server_name m.market.lsh123.com;
+        location / {
+            proxy_pass http://m.yougong.elianshang.com;
+        }
+    }
+    
+
+    server {
+        listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+        server_name sj.yougong.elianshang.com;
+        location / {
+            proxy_pass http://sj.yougong.elianshang.com;
+        }
+    }
+
+    server {
+        listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+        server_name sjapi.yougong.elianshang.com;
+        location / {
+            proxy_pass http://sjapi.yougong.elianshang.com;
+        }
+    }
+
+    server {
+        listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+        server_name app.yougong.elianshang.com;
+        location /static {
+            proxy_pass http://m.yougong.elianshang.com;
+        }
+        location / {  
+            proxy_pass http://m.yougong.elianshang.com/home/app/;
+        }  
+    }
+
+    server {
+            listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+            server_name market.lsh123.com;
+            location / {
+            	proxy_pass http://market.lsh123.com;
+            }
+    }
+
+    server {
+            listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+            server_name vrm.lsh123.com;
+            location / {
+            	proxy_pass http://vrm.lsh123.com;
+            }
+    }
+
+    server {
+            listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+            server_name xs.lshyg.cn; 
+            location / {
+            	proxy_pass http://xs.lshyg.cn;
+            }
+    }
+
+    
+   # server {
+   #  	listen 80;
+   # server_name search.market.lsh123.com;
+   # location / {
+   # 	proxy_pass http://search.market.lsh123.com;
+   # }
+   # }
+
+

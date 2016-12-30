@@ -1,0 +1,90 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name qf.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-jqf/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-jqf/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name dev.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-dev/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-dev/webroot;	
+	}
+	include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fhol.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-fhol/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-fhol/webroot;	
+	}
+	include fe_server_base;
+}
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fh.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-fh/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-fh/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fh2.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-fh2/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-fh2/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name yxy.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-yxy/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-yxy/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qf.market-mis.work.lsh123.com;
+    root    /home/work/test-env/market-mis/fe-test-qf/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-mis/fe-test-qf/webroot;
+    }
+    include fe_server_base;
+}

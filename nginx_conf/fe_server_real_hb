@@ -1,0 +1,91 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-hb/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-hb/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb2.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-hb2/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-hb2/webroot/;
+	}
+	include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.approve.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-approve-hb/webroot;	
+	location /static/ {
+		root    /home/work/code/Avatar/yaf/fe-test-approve-hb/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.vrm.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-vrm-hb/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-vrm-hb/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.market.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/rd-dev-market-hb/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/rd-dev-market-hb/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.market-supply.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/rd-dev-market-supply-hb/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/rd-dev-market-supply-hb/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hb.tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-hb/webroot;	
+	location /static/ {
+		root /home/work/test-env/market-tms/fe-test-hb/webroot;
+	}
+	include fe_server_base;
+}

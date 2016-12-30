@@ -1,0 +1,9 @@
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name jq.wms.wmdev2.lsh123.com;
+    root /home/work/test-env/wms-phpui/fe-test-jq/webroot;
+    include fe_server_base;
+}

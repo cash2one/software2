@@ -1,0 +1,38 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hq.market-mis.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-mis/fe-test-hq/webroot;
+	location /static/ {
+		root /home/work/test-env/market-mis/fe-test-hq/webroot;
+	}
+	include fe_server_base;
+}
+
+server{
+    listen 80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name hq.market-h5.wmdev2.lsh123.com;
+    root /home/work/test-env/market-h5/fe-test-hq/webroot;
+    location /static/ {
+        root /home/work/test-env/market-h5/fe-test-hq/webroot;
+    }
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name hq.market-trans-h5.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-trans-h5/fe-test-hq/webroot;
+    location /static/ {
+        root /home/work/test-env/market-trans-h5/fe-test-hq/webroot;
+    }
+    include fe_server_base;
+}

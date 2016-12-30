@@ -1,0 +1,60 @@
+	index index.php;
+
+        error_page 413       /static/common/html/413.html; 
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        if ( $http_referer ~* baidu.com|sogou.com|google.com ){
+            rewrite  "^/(.*)"       http://m.yougong.elianshang.com/$1 permanent;
+        }
+
+        #allow 192.168.0.0/16;
+        #deny all;
+        #error_page  403              /403.html;
+        #location = /403.html {
+        #    rewrite  ^(.*)    http://m.yougong.elianshang.com permanent;
+        #}
+
+
+        location ~ \.php$ {
+	    index          index.php;
+            fastcgi_pass   unix:/home/work/liujieliang/php/var/run/php-cgi.sock; 
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+	location / {
+             try_files $uri    $uri/    /index.php$is_args$args;
+        }	
+
+        #location /img/examples {
+        #    try_files $uri $uri/;
+        #}
+
+        #location /img/ {
+        #    rewrite /img/(.*)/(.*) /_img/fuck/$2$1;
+        #}
+
+        #location /_img/fuck/ {
+        #    gridfs res_img
+        #        root_collection=fs
+               # field=_id
+               # type=objectid;
+           # mongo 127.0.0.1:30000;
+      #  }
+
+#
+#        location /file/ {
+#            gridfs res_file
+#                 root_collection=fs
+#                 field=_id
+ #                type=objectid;
+  #          mongo 127.0.0.1:30000;
+  #      }

@@ -1,0 +1,72 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wc.market-mis.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-mis/fe-test-wc/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-mis/fe-test-wc/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wc.market-h5.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-h5/fe-test-wc/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-h5/fe-test-wc/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wc.market-rd.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-rd/fe-test-wc/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-rd/fe-test-wc/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wc.market-trans-app.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-trans-app/fe-test-wc/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-trans-app/fe-test-wc/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name wc.market-trans-h5.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-trans-h5/fe-test-wc/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-trans-h5/fe-test-wc/webroot;    
+    }
+	
+    include fe_server_base;
+}
+

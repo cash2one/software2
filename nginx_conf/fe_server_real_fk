@@ -1,0 +1,39 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fk.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-fk/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-fk/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fk1.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-fk/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-fk/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name fk.vrm.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-vrm-fk/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-vrm-fk/webroot/;
+	}
+	include fe_server_base;
+}
+

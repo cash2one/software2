@@ -1,0 +1,96 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.dev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-gl/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-gl/webroot/;
+	}
+	include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gll.dev.lsh123.com;
+	root    /home/work/test-env/market-mis/fe-test-gl/ACL-RD/webroot; 
+	include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.market-mis.wmdev2.lsh123.com;
+	root /home/work/gouli/MARKET-SUPPLY/webroot; 
+	location /static/ {
+		root /home/work/gouli/MARKET-SUPPLY/webroot; 
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.market-sales-h5.wmdev2.lsh123.com;
+	root	/home/work/gouli/MARKET-SALES-H5/webroot;	
+	location /static/ {
+		root /home/work/gouli/MARKET-SALES-H5/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name sm.market-mis.wmdev2.lsh123.com;
+	root /home/work/test-env/market-mis/fe-test-sm/webroot; 
+	location /static/ {
+		root /home/work/test-env/market-mis/fe-test-sm/webroot; 
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.market-h5.wmdev2.lsh123.com;
+	root	/home/work/gouli/MARKET-H5/webroot;	
+	location /static/ {
+		root /home/work/gouli/MARKET-H5/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.acl.wmdev2.lsh123.com;
+	root /home/work/gouli/ACL-RD/webroot; 	
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name gl.api.wmdev2.lsh123.com;
+	root /home/work/gouli/MARKET-API/webroot; 	
+	include fe_server_base;
+}

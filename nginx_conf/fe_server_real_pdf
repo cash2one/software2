@@ -1,0 +1,147 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name pdf.market-mis.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-mis/fe-test-pdf/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-mis/fe-test-pdf/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name pdf.market-h5.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-h5/fe-test-pdf/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-h5/fe-test-pdf/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name pdf.market-rd.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-rd/fe-test-pdf/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-rd/fe-test-pdf/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+#server {
+#	listen  80;
+#	server_name pdf.market-trans-app.wmdev2.lsh123.com;
+#	#root	/home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+#    root /home/work/test-env/market-trans-app/fe-test-ty;
+#    location /static/ {
+#        #root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;    
+#        root /home/work/test-env/market-trans-app/fe-test-ty;
+#    }
+#	
+#    include fe_server_base;
+#}
+
+
+server {
+   listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+   server_name pdf.market-trans-app.wmdev2.lsh123.com;
+   #root   /home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+   root /home/work/test-env/market-trans-app/fe-test-ty/webroot;
+   location /static/ {
+       #root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+       root /home/work/test-env/market-trans-app/fe-test-ty/webroot;
+       }
+       include fe_server_base;
+}
+
+#external test url
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name mta.test.wmdev2.lsh123.com;
+    #root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+    root    /home/work/test-env/market-api/fe-test-pdf/webroot;
+    location /static/ {
+         #root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+         root    /home/work/test-env/market-api/fe-test-pdf/webroot;
+    }
+    include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name pdf.market-trans-h5.wmdev2.lsh123.com;
+	root	/home/work/test-env/market-trans-h5/fe-test-pdf/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-trans-h5/fe-test-pdf/webroot;    
+    }
+	
+    include fe_server_base;
+}
+
+server {
+     listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+     server_name pdf1.market-trans-app.wmdev2.lsh123.com;
+     root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;
+     location /static/ {
+         root    /home/work/test-env/market-trans-app/fe-test-pdf/webroot;    
+     }
+                                        
+     include fe_server_base;
+}
+
+
+server {
+     listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+     server_name codis.market-trans-h5.wmdev2.lsh123.com;
+     location / {
+#         auth_basic "codis auth";
+#         auth_basic_user_file /etc/nginx/passwd.db;
+         proxy_set_header Host $host;
+         proxy_set_header X-Forwarded-For $remote_addr;
+         proxy_pass http://192.168.60.59:18087;                                                                                              }
+
+}
+
+
+server {
+      listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+      server_name pdf.market-api.wmdev2.lsh123.com;
+      root    /home/work/test-env/market-api/fe-test-pdf/webroot;
+      location /static/ {
+          root    /home/work/test-env/market-api/fe-test-pdf/webroot;
+      }
+
+      include fe_server_base;
+}

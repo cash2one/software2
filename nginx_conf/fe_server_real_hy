@@ -1,0 +1,48 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hy.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-hy/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-platform-hy/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name hy.vrm.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-vrm-hy/webroot;	
+	location /static/ {
+		root /home/work/code/Avatar/yaf/fe-test-vrm-hy/webroot/;
+	}
+	include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name hy.wms.wmdev2.lsh123.com;
+    root /home/work/test-env/wms-phpui/fe-test-hy/webroot;
+    include fe_server_base;
+}
+
+server{
+        listen 80;
+        if ($http_user_agent ~* Baiduspider){
+            return 403 http://www.hellonet8.com$request_uri;
+        }
+        server_name hy.market-h5.wmdev2.lsh123.com;
+        root /home/work/test-env/market-h5/fe-test-hy/webroot;
+        location /static/ {
+             root /home/work/test-env/market-h5/fe-test-hy/webroot;
+        }
+        include fe_server_base;
+}

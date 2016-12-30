@@ -1,0 +1,68 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name qa2.market-tms.wmdev.lsh123.com;
+	root	/home/work/test-env/market-tms/fe-test-qa2/webroot;	
+	location /static/ {
+	    root	/home/work/test-env/market-tms/fe-test-qa2/webroot;	
+	}
+	include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qa2.market-mis.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-mis/fe-test-qa2/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-mis/fe-test-qa2/webroot;
+    }
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qa2.market-h5.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-h5/fe-test-qa2/webroot;
+    location /static/ {
+        root    /home/work/test-env/market-h5/fe-test-qa2/webroot;
+    }
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qa2.market.wmdev2.lsh123.com;
+    root    /home/work/test-env/market-rd/fe-test-qa2/webroot;
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qa2.market-api.wmdev2.lsh123.com;
+    root /home/work/test-env/market-api/fe-test-qa2/webroot;
+    include fe_server_base;
+}
+
+server {
+    listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+    server_name qa2.market-rd.wmdev2.lsh123.com;
+    root /home/work/test-env/market-rd/fe-test-qa2/webroot;
+    include fe_server_base;
+}

@@ -1,0 +1,25 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name sq.wmdev.lsh123.com;
+	root	/home/work/code/Avatar/yaf/fe-test-platform-sq/webroot;
+	location /static/ {
+		root  /home/work/code/Avatar/yaf/fe-test-platform-sq/webroot;
+	}
+	include fe_server_base;
+}
+
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name sq.approve.wmdev.lsh123.com;
+	root        /home/work/code/Avatar/yaf/fe-test-platform-sq-approve/webroot;
+	location /static/ {
+		root    /home/work/code/Avatar/yaf/fe-test-platform-sq-approve/webroot;
+	}
+	include fe_server_base;
+}

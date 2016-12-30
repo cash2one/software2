@@ -1,0 +1,12 @@
+server {
+	listen  80;
+if ($http_user_agent ~* Baiduspider){
+return 403 http://www.hellonet8.com$request_uri;
+}
+	server_name new.wmdev.lsh123.com;
+	root	/home/work/ty/new/TENDER-RD/webroot;
+	location /static/ {
+		root /home/work/ty/new/TENDER-RD/webroot;
+	}
+	include fe_server_base;
+}
